@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from .serializers import (
@@ -33,6 +34,11 @@ class DoctorRegistrationView(generics.CreateAPIView):
             "user": serializer.data,
             "message": "Doctor account created successfully",
         }, status=status.HTTP_201_CREATED)
+    
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [IsAuthenticated()]
+        return [permissions.IsAdminUser()]
 
 class PatientRegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()

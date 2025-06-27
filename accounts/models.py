@@ -60,7 +60,6 @@ class CustomUser(AbstractUser):
 class PharmacyProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='pharmacy_profile')
     pharmacy_name = models.CharField(max_length=255)
-    address = models.TextField()
     license = models.ImageField(upload_to='licenses/')
 
     def __str__(self):

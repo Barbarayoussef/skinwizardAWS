@@ -77,3 +77,7 @@ class ChatMessageViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return ChatMessage.objects.filter(session_id=self.kwargs['session_pk'])
+
+
+
+

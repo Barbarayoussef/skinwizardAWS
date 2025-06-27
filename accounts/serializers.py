@@ -210,12 +210,12 @@ class PharmacyRegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
     pharmacy_name = serializers.CharField()
-    address = serializers.CharField()
+    #address = serializers.CharField()
     license = serializers.ImageField()
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'confirm_password', 'pharmacy_name', 'address', 'license']
+        fields = ['email', 'password', 'confirm_password', 'pharmacy_name', 'license']
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
@@ -227,7 +227,7 @@ class PharmacyRegisterSerializer(serializers.ModelSerializer):
         validated_data.pop('confirm_password')
 
         pharmacy_name = validated_data.pop('pharmacy_name')
-        address = validated_data.pop('address')
+        
         license = validated_data.pop('license')
 
         user = User.objects.create_user(
@@ -238,8 +238,7 @@ class PharmacyRegisterSerializer(serializers.ModelSerializer):
 
         PharmacyProfile.objects.create(
             user=user,
-            pharmacy_name=pharmacy_name,
-            address=address,
+            pharmacy_name=pharmacy_name,        
             license=license
         )
 

@@ -32,6 +32,6 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(PharmacyProfile)
 class PharmacyProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'pharmacy_name', 'address')
+    list_display = ('user', 'pharmacy_name')
 
 admin.site.register(CustomUser, CustomUserAdmin)
